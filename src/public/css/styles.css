@@ -7,4 +7,25 @@
 :root {
   font-family: 'Open Sans', sans-serif, system-ui, -apple-system, 'Helvetica Neue';
   font-size: 16.5px;
+  color-scheme: light dark;
+}
+
+button, input {
+  font: inherit;
+  padding: .5rem;
+  cursor: pointer;
+}
+
+body {
+  padding: 1rem;
+}
+
+form {
+  display: grid;
+  gap: .5rem;
+  width: 60ch;
+}
+
+form input {
+  width: 100%;
 }

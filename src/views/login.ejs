@@ -1,0 +1,23 @@
+g!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>vouchCert | Login page</title>
+  </head>
+  <body>
+    <form method="POST" action="/api/login">
+      <label for="username">
+        username
+        <input type="text" id="username" name="username" placeholder="enter username">
+      </label>
+      <label for="password">
+        password
+        <input type="password" id="password" name="password" placeholder="enter password">
+      </label>
+
+      <button type="submit">submit</button>
+    </form>
+  </body>
+</html>

@@ -1,17 +1,45 @@
-import { Router } from "express"
+import { Router } from 'express'
 
 const router:Router = Router()
 
+
+function isAuthenticated(req, res, next) {
+  if(req.session.user) { 
+    return next()
+  } else {
+    res.redirect('/api/login')
+  }
+} //auth middleware
+
+
 //homepage
-router.get('/', (req, res) => {
-  res.status(200).render('index')
+router.get('/', isAuthenticated, (req, res) => {
+  res.status(200).render('home')
 })
 
 //auth
-router.post('/api/auth/login', (req, res) => {})
-router.post('/api/auth/logout', (req, res) => {})
+router.get('/api/login', (req, res, next) => {
+  if(req.session.user) {
+    res.status(200).redirect('/')
+  } else {
+    res.status(200).render('login')
+  }
+})
+
+router.post('/api/login', (req, res) => {
+  const { username, password } = req.body
+  if(username === 'mweene' && password === '1234') {
+    req.session.user = username
+    res.status(200).redirect('/')
+  } else {
+    res.render('login')
+  }
+})
+
+router.post('/api/logout', (req, res) => {})
+
 //certificates
-router.post('/api/certificates', (req, res) => {}) //create new certificate
+router.post('/api/certificates', isAuthenticated, (req, res) => {}) //create new certificate
 router.post('/api/certificates/bulk', (req, res) => {}) //issue many certificates
 
 router.get('/api/certificates', (req, res) => {}) //list certificates
@@ -25,4 +53,5 @@ router.get('/api/verify/:publicCode', (req, res) => {}) //qrcode verification
 
 //health
 router.get('/api/health', (req, res) => {}) //check api health
+
 export default router
