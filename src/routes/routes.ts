@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import bcrypt from 'bcryptjs'
+import { createHash, verifyHash } from '../utils/cryptoUtils.js'
 
 const router:Router = Router()
 
@@ -44,11 +44,10 @@ router.post('/api/certificates', isAuthenticated, (req, res) => {
   const institutionName = 'ALPHABET INSTITUTE'
   const fullDetails = `${JSON.stringify({institutionName, ...req.body})}`
 
-  const salt = bcrypt.genSaltSync(10)
-  const hash = bcrypt.hashSync(fullDetails, salt)
+  const hash = createHash(fullDetails)
   console.log(hash)
   //create a hash and push it to the database
-  const compare = bcrypt.compareSync(fullDetails, hash)
+  const compare = verifyHash(fullDetails, hash)
   console.log(compare)
 
 }) //create new certificate
