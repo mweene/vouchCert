@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import bcrypt from 'bcryptjs'
 
 const router:Router = Router()
 
@@ -39,7 +40,18 @@ router.post('/api/login', (req, res) => {
 router.post('/api/logout', (req, res) => {})
 
 //certificates
-router.post('/api/certificates', isAuthenticated, (req, res) => {}) //create new certificate
+router.post('/api/certificates', isAuthenticated, (req, res) => {
+  const institutionName = 'ALPHABET INSTITUTE'
+  const fullDetails = `${JSON.stringify({institutionName, ...req.body})}`
+
+  const salt = bcrypt.genSaltSync(10)
+  const hash = bcrypt.hashSync(fullDetails, salt)
+  console.log(hash)
+  //create a hash and push it to the database
+  const compare = bcrypt.compareSync(fullDetails, hash)
+  console.log(compare)
+
+}) //create new certificate
 router.post('/api/certificates/bulk', (req, res) => {}) //issue many certificates
 
 router.get('/api/certificates', (req, res) => {}) //list certificates

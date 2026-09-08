@@ -13,6 +13,9 @@
 button, input {
   font: inherit;
   padding: .5rem;
+}
+
+button {
   cursor: pointer;
 }
 
@@ -28,4 +31,8 @@ form {
 
 form input {
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }

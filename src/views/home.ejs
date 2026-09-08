@@ -3,10 +3,39 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="/js/app.js" defer></script>
     <title>vouchCert | Homepage</title>
   </head>
   <body>
     <a href="/api/certificates">view certificates</a>
-    <button>create new certificate</button>
+    <button id="new_certificate">create new certificate</button>
+
+    <form id="form" class="hidden">
+      <label for="studentId">
+        student id:
+        <input type="text" name="studentId" required placeholder="enter student ID">
+      </label>
+
+      <label for="name">
+        name:
+        <input type="text" name="name" required placeholder="enter name">
+      </label>
+
+      <label for="year">
+        year of completion:
+        <input type="date" name="year" required placeholder="enter year">
+      </label>
+
+      <label for="course">
+        select a course:
+        <select id="course" name="course" required>
+          <option value="systems design">systems design</option>
+          <option value="entreprenuership">entreprenuership</option>
+          <option value="communication">communication</option>
+        </select>
+      </label>
+
+      <button type="submit">submit</button>
+    </form>
   </body>
 </html>
